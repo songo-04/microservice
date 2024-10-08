@@ -11,4 +11,4 @@ class SimpleTaskModelUpdate(BaseModel):
     task_name : str = None
     task_date_begin : str = None
     task_date_ending : str = None
-    task_desc : str = None 
+    task_desc : str = None
