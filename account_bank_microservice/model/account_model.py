@@ -2,6 +2,7 @@ from pydantic import BaseModel
 
 class AccountModel(BaseModel):
     id_account : int = None
+    userId:str
     account_name:str
     account_balance:float
     

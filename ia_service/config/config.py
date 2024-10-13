@@ -7,11 +7,13 @@ load_dotenv()
 
 # Create a new client and connect to the server
 client = MongoClient(os.getenv("uri_offline"), server_api=ServerApi('1'))
-db=client.bank_service_db
+db=client.ai_service_db
+user_collection = db['ai_service']
+face_collection = db['faces_db']
 
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to bank service!")
+    print("Pinged your deployment. You successfully connected to MongoDB!")
 except Exception as e:
     print(e)

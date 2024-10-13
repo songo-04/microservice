@@ -32,12 +32,3 @@ async def update_profile(data_form: ProfileModelUpdate,is_auth: dict=Depends(is_
         "message":"profile updated !!!",
         "status":status.HTTP_200_OK
     }
-    
-#delete
-@profile_route.delete('/delete')
-async def deleted_profile(is_auth: dict=Depends(is_authenticate)):
-    userId = is_auth['userId']
-    profile_collection.find_one_and_delete({"userId":userId})
-    
-    return {"message":"profile deleted !!!"}
-
