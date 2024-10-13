@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI # type: ignore
 
 from routes.message_private_router import message_private_router
 app = FastAPI()
@@ -13,5 +13,5 @@ async def get():
     
 if __name__ == "__main__":
     
-    import uvicorn
+    import uvicorn # type: ignore
     uvicorn.run(app,host="0.0.0.0",port=5050)

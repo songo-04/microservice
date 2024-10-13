@@ -1,5 +1,5 @@
-from fastapi import APIRouter, status, HTTPException, Depends
-from bson import ObjectId
+from fastapi import APIRouter, status, HTTPException, Depends # type: ignore
+from bson import ObjectId # type: ignore
 
 from utils.is_auth import is_authenticate
 from models.private_message_model import (

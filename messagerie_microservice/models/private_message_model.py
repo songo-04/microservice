@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel # type: ignore
 class PrivateMessageModel(BaseModel):
     sender_id:str = None
     receiver_id:str = None
