@@ -1,0 +1,4 @@
+.env
+/videos
+videos/
+ngrok.exe
