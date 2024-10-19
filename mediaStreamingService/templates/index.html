@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Streaming Vidéo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      video {
+        max-width: 100%;
+      }
+      .video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        height: 0;
+      }
+      .video-container video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-4xl font-bold text-blue-600">Streaming Vidéo</h1>
+        <div class="flex items-center">
+          <span class="mr-4">Bienvenue, {{ username }}</span>
+          <a
+            href="/"
+            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+          >
+            Déconnexion
+          </a>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 text-gray-700">
+            Vidéos disponibles
+          </h2>
+          <div class="bg-white shadow-md rounded-lg p-4">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Rechercher une vidéo..."
+              class="w-full p-2 mb-4 border rounded"
+            />
+            <ul id="videoList" class="space-y-2">
+              {% for video in video_files %}
+              <li class="video-item">
+                <button
+                  onclick="loadVideo('/api/video/{{ video }}')"
+                  class="w-full text-left p-2 hover:bg-gray-100 rounded transition duration-200"
+                >
+                  {{ video }}
+                </button>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-semibold mb-4 text-gray-700">
+            Lecteur vidéo
+          </h2>
+          <div class="video-container bg-black rounded-lg overflow-hidden">
+            <video id="videoPlayer" controls class="w-full">
+              Votre navigateur ne supporte pas la balise vidéo.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function loadVideo(src) {
+        const video = document.getElementById("videoPlayer");
+        video.src = src;
+        video.load();
+      }
+
+      const searchInput = document.getElementById("searchInput");
+      const videoList = document.getElementById("videoList");
+      const videoItems = videoList.getElementsByClassName("video-item");
+
+      searchInput.addEventListener("input", function () {
+        const searchTerm = this.value.toLowerCase();
+        Array.from(videoItems).forEach((item) => {
+          const text = item.textContent.toLowerCase();
+          item.style.display = text.includes(searchTerm) ? "" : "none";
+        });
+      });
+    </script>
+  </body>
+</html>
