@@ -97,7 +97,9 @@ async def list_videos():
 
 
 @app.get("/api/video/{filename:path}")
-async def stream_video(filename: str, username: str = Depends(get_current_username)):
+async def stream_video(
+    request: Request, filename: str, username: str = Depends(get_current_username)
+):
     # Décodez le nom du fichier
     filename = unquote(filename)
     file_path = os.path.join(MEDIA_FOLDER, filename)
@@ -106,7 +108,7 @@ async def stream_video(filename: str, username: str = Depends(get_current_userna
         raise HTTPException(status_code=404, detail="Vidéo non trouvée")
 
     file_size = os.path.getsize(file_path)
-    headers = Request.headers
+    headers = request.headers
     range_header = headers.get("range")
 
     if range_header:
