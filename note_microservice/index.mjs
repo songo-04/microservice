@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(universalCookieMiddleware());
 app.use(
   cors({
-    origin: "http://127.0.0.1:3000",
+    origin: "*",
     credentials: true,
   })
 );
