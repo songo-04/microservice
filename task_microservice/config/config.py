@@ -6,7 +6,7 @@ import os
 load_dotenv()
 
 # Create a new client and connect to the server
-client = MongoClient(os.getenv("uri_offline"), server_api=ServerApi('1'))
+client = MongoClient(os.getenv("uri"), server_api=ServerApi('1'))
 db=client.task_service_db
 simple_task_collection = db['simple_task']
 
