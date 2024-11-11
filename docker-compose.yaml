@@ -1,0 +1,4 @@
+services:
+  user_service:
+    build:
+      - context: ./user_microservice
