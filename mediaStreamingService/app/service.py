@@ -135,6 +135,29 @@ async def stream_video(
     return response
 
 
+@app.get("/video_webcam")
+async def video_webcam_stream():
+    # Ouvrir la caméra (0 pour la caméra par défaut)
+    cap = cv2.VideoCapture(0)
+
+    def generate_frames():
+        while True:
+            success, frame = cap.read()  # Lire une image de la caméra
+            if not success:
+                break
+            else:
+                # Encoder l'image en JPEG
+                ret, buffer = cv2.imencode(".jpg", frame)
+                frame = buffer.tobytes()  # Convertir en bytes
+                yield (
+                    b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame + b"\r\n"
+                )  # Format pour le streaming
+
+    return StreamingResponse(
+        generate_frames(), media_type="multipart/x-mixed-replace; boundary=frame"
+    )
+
+
 if __name__ == "__main__":
     uvicorn.run(
         "app.service:app",
