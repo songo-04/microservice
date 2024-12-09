@@ -6,6 +6,8 @@ import bodyParser from "body-parser";
 import { offlinedb, PORT } from "./config.mjs";
 import universalCookieMiddleware from "universal-cookie-express";
 import note_route from "./routes/note_route.mjs";
+import dotenv;
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -24,7 +26,7 @@ app.use(
 app.use("/api/note", note_route);
 
 mongoose
-  .connect(offlinedb)
+  .connect(ENV)
   .then(console.log("note service database connected"))
   .catch((err) => {
     console.log(err.message);
