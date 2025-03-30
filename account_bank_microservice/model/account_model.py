@@ -14,3 +14,7 @@ class AccountModel(BaseModel):
                 "account_balance":data['account_balance']
             }
         )
+
+
+    def serializer_list(data):
+        return []

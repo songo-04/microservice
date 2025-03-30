@@ -23,7 +23,7 @@
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.5.0",
-    "mongoose": "^8.3.0",
+    "mongoose": "^8.9.5",
     "nodemon": "^3.1.0",
     "universal-cookie": "^7.1.4",
     "universal-cookie-express": "^7.1.4"
